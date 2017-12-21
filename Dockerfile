@@ -6,7 +6,7 @@ ARG ITOP_USER=itop
 ARG ITOP_PASSW=password
 ARG ITOP_NAME_DB=itop
 
-#Actualizafcion e instalacion de dependencias:
+#Actualizacion e instalacion de dependencias:
 RUN apt-get update && \
 apt-get install -y apache2 mysql-server php7.0 php7.0-mysql php7.0-ldap php7.0-mcrypt php7.0-cli php7.0-soap php7.0-json graphviz wget unzip php7.0-dom php7.0-gd php7.0-zip
 
@@ -32,20 +32,20 @@ cp -R ./web/* /var/www/html/ && \
 chown -R www-data:www-data /var/www && \
 rm -Rf ./web && rm -Rf ./iTop-2.4.0-3585.zip
 
-#Creacion de la DB y usuario
+#Creacion de usuario y DB
 RUN service mysql start && \
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS $ITOP_NAME_DB" && \
 mysql -u root -e "CREATE USER IF NOT EXISTS $ITOP_USER IDENTIFIED BY '$ITOP_PASSW'" && \
-mysql -u root -e "GRANT ALL PRIVILEGES ON $ITOP_NAME_DB.* TO '$ITOP_USER'@'%' WITH GRANT OPTION" && \
-mkdir -p /var/www/html/extensions/sample-module && \
-mkdir -p /var/www/html/extensions/toolkit
+mysql -u root -e "GRANT ALL PRIVILEGES ON $ITOP_NAME_DB.* TO '$ITOP_USER'@'%' WITH GRANT OPTION"
 
-#Modulos personalizados
+#Rutas para la instalacion de modulos personalizados
+mkdir -p /var/www/html/extensions/sample-module && \
+mkdir -p /var/www/html/extensions/toolkit && \
+chown -R www-data:www-data /var/www/html
+
+#Copia de modulos personalizados
 ADD sample-module /var/www/html/extensions/sample-module
 ADD toolkit /var/www/html/toolkit
-
-#Correcion de usuario y grupo  
-RUN chown -R www-data:www-data /var/www
 
 #Se expone el puerto 80
 EXPOSE 80
