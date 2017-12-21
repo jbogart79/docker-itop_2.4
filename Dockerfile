@@ -44,8 +44,8 @@ mkdir -p /var/www/html/extensions/toolkit && \
 chown -R www-data:www-data /var/www/html
 
 #Copia de modulos personalizados
-ADD sample-module /var/www/html/extensions/sample-module
-ADD toolkit /var/www/html/toolkit
+ADD sample-module.tar.bz2 /var/www/html/extensions/sample-module
+ADD toolkit.tar.bz2 /var/www/html/toolkit
 
 #Se expone el puerto 80
 EXPOSE 80
