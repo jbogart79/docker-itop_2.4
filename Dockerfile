@@ -39,7 +39,7 @@ mysql -u root -e "CREATE USER IF NOT EXISTS $ITOP_USER IDENTIFIED BY '$ITOP_PASS
 mysql -u root -e "GRANT ALL PRIVILEGES ON $ITOP_NAME_DB.* TO '$ITOP_USER'@'%' WITH GRANT OPTION"
 
 #Rutas para la instalacion de modulos personalizados
-mkdir -p /var/www/html/extensions/sample-module && \
+RUN mkdir -p /var/www/html/extensions/sample-module && \
 mkdir -p /var/www/html/extensions/toolkit && \
 chown -R www-data:www-data /var/www/html
 
