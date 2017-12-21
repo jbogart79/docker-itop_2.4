@@ -1,4 +1,4 @@
-#imagen base:
+#Imagen base:
 FROM  debian
 
 #Variables
@@ -38,14 +38,12 @@ mysql -u root -e "CREATE DATABASE IF NOT EXISTS $ITOP_NAME_DB" && \
 mysql -u root -e "CREATE USER IF NOT EXISTS $ITOP_USER IDENTIFIED BY '$ITOP_PASSW'" && \
 mysql -u root -e "GRANT ALL PRIVILEGES ON $ITOP_NAME_DB.* TO '$ITOP_USER'@'%' WITH GRANT OPTION"
 
-#Rutas para la instalacion de modulos personalizados
-RUN mkdir -p /var/www/html/extensions/sample-module && \
-mkdir -p /var/www/html/extensions/toolkit && \
-chown -R www-data:www-data /var/www/html
-
 #Copia de modulos personalizados
 ADD sample-module.tar.bz2 /var/www/html/extensions/sample-module
 ADD toolkit.tar.bz2 /var/www/html/toolkit
+
+#Rutas para la instalacion de modulos personalizados
+chown -R www-data:www-data /var/www/html
 
 #Se expone el puerto 80
 EXPOSE 80
