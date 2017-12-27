@@ -40,6 +40,7 @@ mysql -u root -e "GRANT ALL PRIVILEGES ON $ITOP_NAME_DB.* TO '$ITOP_USER'@'%' WI
 
 #Copia de modulos personalizados
 ADD sample-module.tar.bz2 /var/www/html/extensions/sample-module
+ADD linea-module.tar.bz2 /var/www/html/extensions/linea-module
 ADD toolkit.tar.bz2 /var/www/html/toolkit
 
 #Rutas para la instalacion de modulos personalizados
